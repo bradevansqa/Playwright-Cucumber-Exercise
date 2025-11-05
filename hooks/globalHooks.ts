@@ -1,13 +1,21 @@
-import { After, Before, setDefaultTimeout } from "@cucumber/cucumber";
-import { closeBrowser, initializeBrowser, initializePage } from "../playwrightUtilities";
+import { After } from '@cucumber/cucumber';
+import { getPage } from '../playwrightUtilities';
+import fs from 'fs';
 
-setDefaultTimeout(15000);
+if (!fs.existsSync('traces')) {
+  fs.mkdirSync('traces');
+}
 
-Before( async () => {
-    await initializeBrowser();
-    await initializePage();
-})
+After(async function (scenario) {
+  try {
+    const page = getPage();
+    const context = page.context();
+    const safeName = scenario.pickle.name.replace(/[^a-z0-9]/gi, '_').toLowerCase();
 
-After( async () => {
-    await closeBrowser();
-})
+    await context.tracing.stop({
+      path: `./traces/${safeName}.zip`,
+    });
+  } catch {
+    // If page is not initialized, just skip trace saving
+  }
+});
