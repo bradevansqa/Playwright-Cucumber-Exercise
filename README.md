@@ -56,3 +56,23 @@ You will be scored based on your ability to complete the following tasks:
 - [ ] Modify and extend the 'Validate successful purchase text' from [purchase.feature](features/purchase.feature#6) with steps for each comment listed. Consider writing a new steps.ts file along with an appropriate page.ts
 - [ ] Modify and extend the 'Validate product sort by price sort' from [product.feature](features/product.feature#6) with steps for each comment listed. Utilize the Scenario Outline and Examples table to parameterize the test
 - [ ] Extend the testing coverage with anything you believe would be beneficial
+
+ADDED
+🎥 Viewing Trace Recordings (Debugging Feature)
+
+To replay any test run step-by-step:
+
+npx playwright show-trace traces/<trace-file-name>.zip
+
+
+This opens the Playwright Trace Viewer, allowing you to inspect:
+
+Screenshots at every step
+
+DOM snapshots and element locators
+
+Debug console logs
+
+Network traffic
+
+Action timing and script timeline
