@@ -17,7 +17,15 @@ export class Product {
   }
 
   async getPrices(): Promise<number[]> {
-    const priceTexts = await this.page.locator('[data-test="inventory-item-price"]').allInnerTexts();
-    return priceTexts.map(text => parseFloat(text.replace('$', '')));
+    const priceTexts = await this.page
+      .locator('[data-test="inventory-item-price"]')
+      .allInnerTexts();
+    return priceTexts.map((text) => parseFloat(text.replace('$', '')));
+  }
+
+  async getCartBadgeCount(): Promise<number> {
+    const badge = this.page.locator('.shopping_cart_badge');
+    if ((await badge.count()) === 0) return 0;
+    return parseInt((await badge.textContent()) ?? '0', 10);
   }
 }

@@ -3,3 +3,5 @@ cucumber_report.html
 /node_modules
 recordings/
 traces/*.zip
+playwright-report/
+test-results/

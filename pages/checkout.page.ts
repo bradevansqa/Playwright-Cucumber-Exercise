@@ -24,4 +24,20 @@ export class Checkout {
   async getConfirmationMessage() {
     return this.page.textContent('.complete-header');
   }
+
+  async getOverviewItemNames(): Promise<string[]> {
+    return this.page.locator('[data-test="inventory-item-name"]').allInnerTexts();
+  }
+
+  async getOverviewSubtotal() {
+    return this.page.textContent('[data-test="subtotal-label"]');
+  }
+
+  async getOverviewTax() {
+    return this.page.textContent('[data-test="tax-label"]');
+  }
+
+  async getOverviewTotal() {
+    return this.page.textContent('[data-test="total-label"]');
+  }
 }
